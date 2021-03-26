@@ -1,0 +1,12 @@
+<br/>
+<br/>
+<br/>
+
+<%= content_tag :h3, 'Allowed Postcodes' %>
+<%= link_to 'Add Postcode', new_postcode_path %><br/>
+<% @postcodes.each.with_index(1) do |postcode, index| %>
+
+  <%= index %>
+  <%= postcode.value %>
+  <br/>
+<% end %>

@@ -1,0 +1,5 @@
+<%= content_tag :h1, 'Add Postcode'  %>
+<%= form_for @postcode do |f| %>
+  <%= f.text_field :value %>
+  <%= f.submit 'Add Postcode to White List'%>
+<% end %>
