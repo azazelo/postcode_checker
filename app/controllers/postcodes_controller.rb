@@ -1,22 +1,24 @@
+# frozen_string_literal: true
+
 class PostcodesController < ApplicationController
   def new
     @postcode = Postcode.new
   end
-  
+
   def create
     @postcode = Postcode.new(postcode_params)
     if @postcode.save
       message = "Postcode '#{@postcode.value}' Saved"
-      redirect_to postcodes_path, flash: {now: message, alert_class: 'success'}
+      redirect_to postcodes_path, flash: { now: message, alert_class: 'success' }
     else
-      redirect_to new_postcode_path, flash: {now: @postcode.errors.full_messages.join('. '), alert_class: 'danger' }
+      redirect_to new_postcode_path, flash: { now: @postcode.errors.full_messages.join('. '), alert_class: 'danger' }
     end
   end
-  
+
   def index
-    @postcodes = Postcode.all 
+    @postcodes = Postcode.all
   end
-  
+
   def destroy
     @postcode = Postcode.find(params[:id])
     if @postcode.delete
@@ -26,12 +28,11 @@ class PostcodesController < ApplicationController
       message = "#{@postcode.value} has not been deleted. Something wrong."
       alert_class = 'danger'
     end
-    redirect_to postcodes_path, flash: {now: message, alert_class: alert_class}
+    redirect_to postcodes_path, flash: { now: message, alert_class: alert_class }
   end
-  
-  
-  private 
-  
+
+  private
+
   def postcode_params
     params.require(:postcode).permit(:value, :id)
   end

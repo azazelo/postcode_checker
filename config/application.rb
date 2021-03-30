@@ -1,6 +1,8 @@
-require_relative "boot"
+# frozen_string_literal: true
 
-require "rails/all"
+require_relative 'boot'
+
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -11,9 +13,9 @@ module PostcodeCheckerRor
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
     config.autoload_paths << Rails.root.join('lib/*')
-    config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+    config.action_view.field_error_proc = proc do |html_tag, _instance|
       "<div class=\"field_with_errors control-group error\">#{html_tag}</div>".html_safe
-    }
+    end
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

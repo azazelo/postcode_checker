@@ -1,51 +1,9 @@
-class Check < ApplicationRecord
-  include Checkability
-  
-  attr_accessor :allowed, :messages
-  
-  validates :value, presence: true, uniqueness: true
-  
-  after_initialize :setup
-  def setup
-    self.allowed = nil
-    self.messages = []
-  end
+# frozen_string_literal: true
 
-  def perform
-    self.allowed = _check
-    self.messages << "Postcode '#{value}' is #{_allowness}. "
-  end
-  
-  def _allowness
-    self.allowed ? 'ALLOWED' : 'NOT allowed'
-  end
-  
-  def _check
-    Checkability::Checkable.new(self)
-    .check(
-      proc { |a, b, c| a && ( b || c ) },
-      [ 
-        Checkability::Validator.new(validator_conf),
-        Checkability::StorageChecker.new(storage_conf), 
-        Checkability::ExternalApiChecker.new(external_api_conf)
-      ]
-    )
-  end
-  
-  def storage_conf
-    { storage_class: Postcode }
-  end
-  
-  def external_api_conf
-    { 
-      path: 'http://api.postcodes.io/postcodes/',
-      check_method: proc { |result_hash|
-        %w(Southwark Lambeth).include?(result_hash['result']['primary_care_trust'])
-      }
-    }
-  end
-  
-  def validator_conf
+class Check < ApplicationRecord
+  validates :value, presence: true, uniqueness: true
+
+  def self.validator_conf
     {
       format: {
         name: 'UK Postcodes',
@@ -53,5 +11,30 @@ class Check < ApplicationRecord
       }
     }
   end
-  
+
+  def self.storage_checker_conf
+    { storage_class: Postcode }
+  end
+
+  def self.external_api_checker_conf
+    {
+      path: 'http://api.postcodes.io/postcodes/',
+      check_method: proc { |result_hash|
+        %w[Havering Southwark Lambeth].include?(result_hash['result']['primary_care_trust'])
+      }
+    }
+  end
+
+  # checkers:
+  #   validator            -> Validator
+  #   storage_checker      -> StorageChecker
+  #   external_api_checker -> ExternalApiChecker
+  # algoritm:
+  #    a proc with logical sentence for how resullts of checks should be treated
+  acts_as_checkable algoritm: proc { |a, b, c| a && (b || c) },
+                    checkers: {
+                      validator: validator_conf,
+                      storage_checker: storage_checker_conf,
+                      external_api_checker: external_api_checker_conf
+                    }
 end
