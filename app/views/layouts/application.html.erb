@@ -5,19 +5,29 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
 
   <body>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <% if flash[:now] %>
-      <%= flash[:now]%>
-    <% end %> 
-
-    <%= yield %>
+    <div class="container" style="margin-top: 2em;">
+      <div class="row">
+        <div class="col-lg-6 offset-1">
+          <div style="margin-top: 2em;">
+            <%= link_to_unless_current 'Check postcode', checking_path %> |
+            <%= link_to_unless_current 'Allowed postcodes', postcodes_path %>
+          </div>
+          
+          <div style="margin-top: 2em;">
+            <% if flash[:now] %>
+              <div class="alert alert-<%= flash[:alert_class] %>" role="alert">
+                <%= flash[:now].html_safe %>
+              </div>
+            <% end %> 
+          </div>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

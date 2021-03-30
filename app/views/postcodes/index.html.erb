@@ -1,12 +1,30 @@
+<%= content_tag :h1, 'Allowed Postcodes' %>
+<%= link_to 'Add Postcode', new_postcode_path %>
 <br/>
-<br/>
-<br/>
-
-<%= content_tag :h3, 'Allowed Postcodes' %>
-<%= link_to 'Add Postcode', new_postcode_path %><br/>
-<% @postcodes.each.with_index(1) do |postcode, index| %>
-
-  <%= index %>
-  <%= postcode.value %>
-  <br/>
+<% if @postcodes.empty? %>
+  There are not any postcode in allowed list yet.
+<% else %>
+  <table class="table">
+    <tr>
+      <th>Num</th>
+      <th>Postcode</th>
+      <th>Actions</th>
+    </tr>
+    <% @postcodes.each.with_index(1) do |postcode, index| %>
+    <tr>
+      <td><%= index %></td>
+      <td><%= postcode.value %></td>
+      <td>
+        <%= button_to  'X', 
+          postcode_path(postcode), 
+          method: :delete,
+          data: {
+            confirm: 'Are you sure to delete record?'
+          },
+          class: 'btn btn-danger'
+        %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
 <% end %>

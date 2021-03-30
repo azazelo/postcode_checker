@@ -1,21 +1,26 @@
-require 'pry'
 class ChecksController < ApplicationController
-  def new
-    @obj = Check.new
+  def checking
+    @check = Check.new
   end
-
-  def create
-    @check = Check.new(check_params)
-    allowness = @check.allowed? ? 'ALLOWED' : 'NOT allowed'
-    message = "Postcode '#{@check.value}' is #{allowness}"
-    
-    redirect_to new_check_path, flash: {now: message}
+  
+  def perform
+    @check = Check.new(value: check_params[:string])
+    if @check.valid?
+      @check.perform
+      message = @check.messages.join('<br/>')
+      redirect_to checking_path, 
+        flash: {now: message, alert_class: @check.allowed ? 'success' : 'danger' }
+    else
+      message = @check.errors.full_messages.join('<br/>')
+      redirect_to checking_path, 
+        flash: {now: message, alert_class: 'danger'}
+    end
   end
   
   private
   
   def check_params
-    params.require(:check).permit(:value)
+    params.permit(:string)
   end
   
 end

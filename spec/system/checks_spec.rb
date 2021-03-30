@@ -8,7 +8,7 @@ describe 'User interface for postcode checks', :aggregate_failures do
   end
     
   def not_allowed_message value
-    "Postcode '#{value}' is NOT ALLOWED"
+    "Postcode '#{value}' is NOT allowed"
   end
     
   ##TODO enable prefix 'u' to call show_page method
@@ -18,36 +18,30 @@ describe 'User interface for postcode checks', :aggregate_failures do
 
     let(:allowed_by_postcodes_io) { 'SE1 7QD' }
     scenario 'get message on screen that postcode is ALLOWED' do
-      visit new_check_path
+      visit checking_path
       expect(page).to have_content "Check Postcode"
-      page.fill_in 'check[value]', with: allowed_by_postcodes_io
+      page.fill_in 'string', with: allowed_by_postcodes_io
       click_button @submit_button_text
       expect(page).to have_content allowed_message(allowed_by_postcodes_io)
-      show_page
     end
 
     let(:not_allowed_by_postcodes_io) { 'RM3 0PD' }
-    scenario 'get message on screen that postcode is NOT ALLOWED' do
-      pending 'Not yet implemented postcodes_io check'
-      
-      visit new_check_path
+    scenario 'get message on screen that postcode is NOT allowed' do
+      visit checking_path
       expect(page).to have_content "Check Postcode"
-      page.fill_in 'check[value]', with: not_allowed_by_postcodes_io
+      page.fill_in 'string', with: not_allowed_by_postcodes_io
       click_button @submit_button_text
       expect(page).to have_content not_allowed_message(not_allowed_by_postcodes_io)
-      show_page
     end
 
-    let(:exists_in_white_list) { 'SH24 1AA' }
-    scenario 'get message on screen that postcode is NOT ALLOWED' do
-      pending 'Not yet implemented white_list check'
-      
-      visit new_check_path
+    let!(:exists_in_white_list) { 'SH24 1AA' }
+    let!(:postcode) { Postcode.create(value: 'SH24 1AA') }
+    scenario 'get message on screen that postcode is NOT allowed' do
+      visit checking_path
       expect(page).to have_content "Check Postcode"
-      page.fill_in 'check[value]', with: exists_in_white_list
+      page.fill_in 'string', with: exists_in_white_list
       click_button @submit_button_text
       expect(page).to have_content allowed_message(exists_in_white_list)
-      show_page
     end
 
 #    scenario 'User wants to see Allowed Postcodes', :web_ui do

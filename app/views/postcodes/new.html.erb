@@ -1,5 +1,11 @@
 <%= content_tag :h1, 'Add Postcode'  %>
-<%= form_for @postcode do |f| %>
-  <%= f.text_field :value %>
-  <%= f.submit 'Add Postcode to White List'%>
+<%= form_for @postcode, autocomplete: 'off' do |f| %>
+  <div class="row form-group">
+    <div class="col-lg-4" style="position: relative;">
+      <%= f.text_field :value, required: true, autocomplete: 'off',  class: 'form-control' %><br/>
+    </div>
+    <div class="col-lg-4" style="position: relative;">
+      <%= f.submit 'Add Postcode to White List', class: 'btn btn-success' %>
+    </div>
+  </div>
 <% end %>

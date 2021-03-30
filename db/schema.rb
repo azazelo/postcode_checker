@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 2021_03_25_121314) do
 
   create_table "checks", force: :cascade do |t|
     t.string "value"
-    t.boolean "allowed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
