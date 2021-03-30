@@ -8,17 +8,32 @@
   </head>
 
   <body>
-    <br>
-    <br>
-    <br>
-    <br>
-      Postcode 'SH24 1AA' is ALLOWED
+    <div class="container" style="margin-top: 2em;">
+      <div class="row">
+        <div class="col-lg-6 offset-1">
+          <div style="margin-top: 2em;">
+            Check postcode |
+            <a href="/postcodes">Allowed postcodes</a>
+          </div>
+          
+          <div style="margin-top: 2em;">
+              <div class="alert alert-success" role="alert">
+                Postcode 'SE1 7QD' is ALLOWED. <br>Value comply with format of UK Postcodes.<br>Allowed Postcodes list: Not found.<br>http://api.postcodes.io/postcodes/: Found.
+              </div>
+          </div>
+          <h1>Check Postcode</h1>
+<form autocomplete="nope" action="/perform" accept-charset="UTF-8" method="post">
+  <div class="row form-group">
+    <div class="col-lg-4" style="position: relative;">
+      <input required="required" class="form-control" type="text" name="string" id="string">
+    </div>
+    <div class="col-lg-4">
+      <input type="submit" name="commit" value="Check Postcode" class="form-control btn btn-success" data-disable-with="Check Postcode">
+    </div>
 
-    <h1>Check Postcode</h1>
-<form class="new_check" id="new_check" action="/checks" accept-charset="UTF-8" method="post">
-  <input type="text" name="check[value]" id="check_value">
-  <input type="submit" name="commit" value="Check Postcode" data-disable-with="Check Postcode">
-</form>
+        </div></form>
+      </div>
+    </div>
   
 
-</body></html>
+</div></body></html>

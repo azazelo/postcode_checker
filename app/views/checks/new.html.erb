@@ -1,5 +1,9 @@
 <%= content_tag :h1, 'Check Postcode'  %>
-<%= form_for @obj do |f| %>
-  <%= f.text_field :value %>
+<%= form_with url: '/check' do |f| %>
+  <div style="position: relative;">
+    <%= @check.errors.full_messages unless @check.errors.empty? %>
+    <%= f.text_field :postcode, required: true, format: /\d/ %>
+  </div>
+  <br/>
   <%= f.submit 'Check Postcode' %>
 <% end %>

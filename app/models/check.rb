@@ -1,41 +1,40 @@
+# frozen_string_literal: true
+
 class Check < ApplicationRecord
-  attr_reader :checkers
-  
-  def allowed?
-    Checkable.new(value: value)
-    .check(
-      [
-#        storage_checker
-        external_api_checker
-      ]
-    )
+  validates :value, presence: true, uniqueness: true
 
-#    @check = Check.new(
-#      check_params.merge(
-#        checkers:
-#        [
-#          FormatChecker,
-#          StorageChecker,
-#          PostcodesIOChecker
-#        ]
-#      )
-#    )
-  end
-  
-  private
-  
-  def storage_checker
-    StorageChecker.new(klass: Postcode)
+  def self.validator_conf
+    {
+      format: {
+        name: 'UK Postcodes',
+        regex: /([a-z]{1,2}[0-9]{1,2})([a-z]{1,2})?(\W)?([0-9]{1,2}[a-z]{2})?/i
+      }
+    }
   end
 
-  def external_api_checker
-    ExternalApiChecker.new(path: 'http://postcodes.io/postcodes/')
+  def self.storage_checker_conf
+    { storage_class: Postcode }
   end
 
-  
-  def perform
-    checkers.map do |checker|
-      checker.check(value)
-    end
-  end  
+  def self.external_api_checker_conf
+    {
+      path: 'http://api.postcodes.io/postcodes/',
+      check_method: proc { |result_hash|
+        %w[Havering Southwark Lambeth].include?(result_hash['result']['primary_care_trust'])
+      }
+    }
+  end
+
+  # checkers:
+  #   validator            -> Validator
+  #   storage_checker      -> StorageChecker
+  #   external_api_checker -> ExternalApiChecker
+  # algoritm:
+  #    a proc with logical sentence for how resullts of checks should be treated
+  acts_as_checkable algoritm: proc { |a, b, c| a && (b || c) },
+                    checkers: {
+                      validator: validator_conf,
+                      storage_checker: storage_checker_conf,
+                      external_api_checker: external_api_checker_conf
+                    }
 end
