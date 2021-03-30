@@ -69,5 +69,4 @@ gem 'jquery-rails'
 
 # for development
 # gem 'checkability', path: '../checkability' 
-
 gem 'checkability'
