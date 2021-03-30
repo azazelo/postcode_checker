@@ -67,4 +67,7 @@ gem 'faraday'
 gem 'bootstrap', '~> 4.5.2'
 gem 'jquery-rails'
 
-gem 'checkability', path: '../checkability'
+# for development
+# gem 'checkability', path: '../checkability' 
+
+gem 'checkability'
