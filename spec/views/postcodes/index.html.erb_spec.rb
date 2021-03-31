@@ -13,7 +13,7 @@ RSpec.describe 'postcodes/index.html.erb', type: :view do
   it 'displays both postcodes' do
     render
 
-    expect(rendered).to match(/SH24 1AA/)
-    expect(rendered).to match(/SH24 1AB/)
+    expect(rendered).to match(/SH241AA/)
+    expect(rendered).to match(/SH241AB/)
   end
 end

@@ -8,7 +8,7 @@ class ChecksController < ApplicationController
   def perform
     @check = Check.new(value: check_params[:string])
     if @check.valid?
-      @check.perform
+      @check.perform_check
       message = @check.messages.join('<br/>')
       redirect_to checking_path,
                   flash: { now: message, alert_class: _alert_class }

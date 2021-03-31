@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'districts/new'
+  get 'districts/create'
+  get 'districts/update'
+  get 'districts/index'
+  get 'districts/destroy'
   get 'checking', to: 'checks#checking'
   post 'perform', to: 'checks#perform'
   #  get 'checks/perform'
@@ -9,6 +14,7 @@ Rails.application.routes.draw do
   #  get 'api/check'
 
   resources :postcodes, only: %i[new create index destroy]
+  resources :districts, only: %i[new create index destroy]
   #  resources :checks, only: [:check]
 
   root 'checks#checking'

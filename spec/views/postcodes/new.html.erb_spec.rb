@@ -9,7 +9,7 @@ RSpec.describe 'postcodes/new.html.erb', type: :view do
            ])
   end
 
-  it 'displays both postcodes' do
+  it 'displays postcode' do
     render
     expect(rendered).to match(/Add Postcode/)
   end

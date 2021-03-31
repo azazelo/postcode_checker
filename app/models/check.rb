@@ -1,40 +1,22 @@
 # frozen_string_literal: true
 
+# Model to keep represent chek object
+#
 class Check < ApplicationRecord
   validates :value, presence: true, uniqueness: true
 
-  def self.validator_conf
-    {
-      format: {
-        name: 'UK Postcodes',
-        regex: /([a-z]{1,2}[0-9]{1,2})([a-z]{1,2})?(\W)?([0-9]{1,2}[a-z]{2})?/i
-      }
-    }
-  end
+  extend UKPostcodeCheckers
 
-  def self.storage_checker_conf
-    { storage_class: Postcode }
-  end
-
-  def self.external_api_checker_conf
-    {
-      path: 'http://api.postcodes.io/postcodes/',
-      check_method: proc { |result_hash|
-        %w[Havering Southwark Lambeth].include?(result_hash['result']['primary_care_trust'])
-      }
-    }
-  end
-
-  # checkers:
+  # strategy (Strategy):
+  #    a proc with logical sentence for how resullts of checks should be treated
+  #
+  # checkers (names - Important):
   #   validator            -> Validator
   #   storage_checker      -> StorageChecker
   #   external_api_checker -> ExternalApiChecker
-  # algoritm:
-  #    a proc with logical sentence for how resullts of checks should be treated
-  acts_as_checkable algoritm: proc { |a, b, c| a && (b || c) },
-                    checkers: {
-                      validator: validator_conf,
-                      storage_checker: storage_checker_conf,
-                      external_api_checker: external_api_checker_conf
-                    }
+  #
+  acts_as_checkable strategy: proc { |a, b, c| a && (b || c) },
+                    checkers: uk_postcode_checkers
+  # uk_postcode_checkers defined
+  # in app/models/concerns/u_k_postcode_checkers.rb
 end
