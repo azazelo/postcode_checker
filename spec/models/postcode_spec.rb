@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Postcode, type: :model do
   it { should validate_presence_of(:value) }
+  subject { Postcode.new(value: 'SH241AX') }
   it { should validate_uniqueness_of(:value) }
 
   it 'saved to DB' do

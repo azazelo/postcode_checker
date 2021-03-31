@@ -13,11 +13,7 @@
     <div class="container" style="margin-top: 2em;">
       <div class="row">
         <div class="col-lg-6 offset-1">
-          <div style="margin-top: 2em;">
-            <%= link_to_unless_current 'Check postcode', checking_path %> |
-            <%= link_to_unless_current 'Allowed postcodes', postcodes_path %>
-          </div>
-          
+          <%= render partial: 'navigation' %>
           <div style="margin-top: 2em;">
             <% if flash[:now] %>
               <div class="alert alert-<%= flash[:alert_class] %>" role="alert">

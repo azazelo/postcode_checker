@@ -12,9 +12,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_210_325_121_314) do
+ActiveRecord::Schema.define(version: 20_210_331_070_305) do
   create_table 'checks', force: :cascade do |t|
     t.string 'value'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+  end
+
+  create_table 'districts', force: :cascade do |t|
+    t.string 'name'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
   end

@@ -1,11 +1,11 @@
-<%= content_tag :h1, 'Check Postcode'  %>
+<%= content_tag :h1, 'Postcode'  %>
 <%= form_with url: '/perform', autocomplete: "off" do |f| %>
   <div class="row form-group">
     <div class="col-lg-4" style="position: relative;">
       <%= f.text_field :string, required: true, class: 'form-control', autocomplete: 'off' %>
     </div>
     <div class="col-lg-4">
-      <%= f.submit 'Check Postcode', class: 'form-control btn btn-success' %>
+      <%= f.submit 'Submit', class: 'form-control btn btn-success' %>
     </div
   </div>
 <% end %>

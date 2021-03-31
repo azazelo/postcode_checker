@@ -9,8 +9,8 @@ RSpec.describe 'checks/checking.html.erb', type: :view do
            ])
   end
 
-  it "displays title 'Check Postcode'" do
+  it "displays title 'Postcode'" do
     render
-    expect(rendered).to match(/Check Postcode/)
+    expect(rendered).to match(/Postcode/)
   end
 end

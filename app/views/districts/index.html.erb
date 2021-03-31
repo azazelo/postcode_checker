@@ -1,0 +1,30 @@
+<%= content_tag :h1, 'Allowed Districts' %>
+<%= link_to 'Add District', new_district_path %>
+<br/>
+<% if @districts.empty? %>
+  There are not any district in allowed list yet.
+<% else %>
+  <table class="table">
+    <tr>
+      <th>Num</th>
+      <th>District</th>
+      <th>Actions</th>
+    </tr>
+    <% @districts.each.with_index(1) do |district, index| %>
+    <tr>
+      <td><%= index %></td>
+      <td><%= district.name %></td>
+      <td>
+        <%= button_to  'X', 
+          district_path(district), 
+          method: :delete,
+          data: {
+            confirm: 'Are you sure to delete record?'
+          },
+          class: 'btn btn-danger'
+        %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>

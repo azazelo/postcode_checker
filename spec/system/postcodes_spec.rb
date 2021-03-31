@@ -8,7 +8,7 @@ describe 'User interface', :aggregate_failures do
   feature 'Save postcode to allowed postcodes list', %(
     To save postcode as a User I want to be able to enter postcode in text_field and click on button [#{@submit_button_text}]
   ) do
-    let(:postcode_value) { 'SE1 7QD' }
+    let(:postcode_value) { 'SE17QD' }
 
     scenario 'User type postcode in text_field and click on Submit button', :web_ui do
       visit new_postcode_path
@@ -23,10 +23,15 @@ describe 'User interface', :aggregate_failures do
       expect(page).to have_content 'Allowed Postcodes'
       click_link 'Add Postcode'
       expect(page).to have_content 'Add Postcode'
+    end
 
-      ## Ucomment show_page if you wants to see resulted browser page.
-      ## required of running webserver on localhost:3000
-      #       show_page
+    scenario 'User inputs invalid postcode and wants
+              to see error message', :web_ui do
+      visit new_postcode_path
+      expect(page).to have_content 'Add Postcode'
+      page.fill_in 'postcode[value]', with: '111'
+      click_button 'Add Postcode to White List'
+      expect(page).to have_content 'Value Only UK postcodes allowed.'
     end
   end
 end
