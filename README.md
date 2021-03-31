@@ -35,8 +35,6 @@ rails s
 ```
 In browser see page http://localhost:3000  
 
-* ...
-
 ## Future works
 
 - [ ] Separate result messages in lines and give them appropriate colors  
