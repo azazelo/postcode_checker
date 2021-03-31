@@ -39,6 +39,6 @@ In browser see page http://localhost:3000
 
 ## Future works
 
-[ ] Separate result messages in lines and give them appropriate colors  
-[ ] Make other configurations e.g.Check ZIP(USA), Check RU Postcodes. etc
+- [ ] Separate result messages in lines and give them appropriate colors  
+- [ ] Make other configurations e.g.Check ZIP(USA), Check RU Postcodes. etc
 
