@@ -8,8 +8,7 @@ Things you may want to cover:
 * Ruby version >= 2.6.2  
   
 * System dependencies:  
-- Rails,  
-- chackability gem  
+chackability gem  
   
 * Configuration  
 ```
