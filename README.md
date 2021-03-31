@@ -28,9 +28,14 @@ rspec
 ## Services (job queues, cache servers, search engines, etc.)  
   
 ## Deployment instructions
+It is not developed for production  
+For use on local computer:  
 ```
-clone repo  
+clone https://github.com/azazelo/postcode_checker.git  
+cd postcode_checker
 bundle install  
+rails db:migrate
+rails db:seed
 rails s  
 ```
 In browser see page http://localhost:3000  
