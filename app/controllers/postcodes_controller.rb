@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# PostcodesController
+#   manage allowed postcodes
+#
 class PostcodesController < ApplicationController
   def new
     @postcode = Postcode.new

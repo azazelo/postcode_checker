@@ -31,3 +31,19 @@ def show_page
   save_page Rails.root.join('public', 'capybara.html')
   `launchy http://localhost:3000/capybara.html`
 end
+
+def submit_button_text
+  'Submit'
+end
+
+def add_postcode_button_text
+  'Add Postcode to White List'
+end
+
+def allowed_message(value)
+  "'#{value}' is ALLOWED"
+end
+
+def not_allowed_message(value)
+  "'#{value}' is NOT allowed"
+end

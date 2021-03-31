@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# ChecksController
+#   manage allowed districts
+#
 class DistrictsController < ApplicationController
   def new
     @district = District.new

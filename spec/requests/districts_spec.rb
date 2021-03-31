@@ -16,7 +16,9 @@ RSpec.describe 'Districts', type: :request do
       expect(response).to have_http_status(:success)
     end
   end
+end
 
+RSpec.describe 'Districts', type: :request do
   describe 'GET /index' do
     it 'returns http success' do
       get '/districts/index'

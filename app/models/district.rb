@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Model to keep allowed districts
+#
 class District < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   after_validation do

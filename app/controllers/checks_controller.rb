@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# ChecksController
+#   manage checking
+#
 class ChecksController < ApplicationController
   def checking
     @check = Check.new
@@ -7,22 +10,20 @@ class ChecksController < ApplicationController
 
   def perform
     @check = Check.new(value: check_params[:string])
-    if @check.valid?
-      @check.perform_check
-      message = @check.messages.join('<br/>')
-      redirect_to checking_path,
-                  flash: { now: message, alert_class: _alert_class }
-    else
-      message = @check.errors.full_messages.join('<br/>')
-      redirect_to checking_path,
-                  flash: { now: message, alert_class: 'danger' }
-    end
+    message, alert_class =
+      if @check.valid?
+        @check.perform_check
+        [@check.messages.join('<br/>'), _alert_class(@check.allowed)]
+      else
+        [@check.errors.full_messages.join('<br/>'), _alert_class(false)]
+      end
+    redirect_to checking_path, flash: { now: message, alert_class: alert_class }
   end
 
   private
 
-  def _alert_class
-    @check.allowed ? 'success' : 'danger'
+  def _alert_class(cond)
+    cond ? 'success' : 'danger'
   end
 
   def check_params
