@@ -68,5 +68,5 @@ gem 'bootstrap', '~> 4.5.2'
 gem 'jquery-rails'
 
 # for development
-#gem 'checkability', path: '../checkability'
- gem 'checkability'
+gem 'checkability', path: '../checkability'
+# gem 'checkability'
