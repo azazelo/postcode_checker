@@ -17,6 +17,14 @@ module UKPostcodeCheckersConf
     }
   end
 
+  # strategy (Strategy):
+  #    a proc with logical sentence for how resullts of checks should be treated
+  #
+  # checkers (names - Important):
+  #   validator            -> Validator
+  #   storage_checker      -> StorageChecker
+  #   external_api_checker -> ExternalApiChecker
+  #
   def strategy
     # proc { a && ( b || ( c && d ) ) },
     proc { |validator, storage, ext_api_validate, ext_api_districts|
@@ -25,12 +33,6 @@ module UKPostcodeCheckersConf
           (ext_api_validate && ext_api_districts)
         )
     }
-    #    proc { |validator, storage, ext_api_validate, ext_api_districts|
-    #      validator &&
-    #        ( storage ||
-    #          ( ext_api_validate && ext_api_districts )
-    #        )
-    #      }
   end
 
   def validator_conf
