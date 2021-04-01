@@ -15,7 +15,7 @@ class ChecksController < ApplicationController
         @check.perform_check
         [@check.messages, _alert_class(@check.allowed)]
       else
-        [@check.errors.full_messages, _alert_class(false)]
+        [@check.errors.full_messages.join('<br/>'), _alert_class(false)]
       end
     redirect_to checking_path, flash: { now: messages, alert_class: alert_class }
   end

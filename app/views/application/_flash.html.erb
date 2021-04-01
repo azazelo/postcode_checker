@@ -2,7 +2,7 @@
   <% if flash[:now] %>
     <% if flash[:now].is_a?(Array) %>
       <% flash[:now].each do |message| %>
-        <% if  message.split('::')[0] == 'true' %>
+        <% if message.split('::')[0] == 'true' %>
           <%= octicon "check", :height => 16, style: 'fill: #28a745;' %>
         <% else %>
           <%= octicon "x", :height => 16, style: 'fill: #721c24;' %>
@@ -10,6 +10,8 @@
         <%= message.split('::')[1] %>
         <br/>
       <% end %>
+    <% else %>
+      <%= flash[:now] %>
     <% end %>
   <% end %> 
 </div>

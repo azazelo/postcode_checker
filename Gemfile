@@ -70,4 +70,4 @@ gem 'octicons_helper'
 
 # for development
 # gem 'checkability', path: '../checkability'
-gem 'checkability'
+gem 'checkability', '0.5.0'
