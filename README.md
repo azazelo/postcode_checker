@@ -44,4 +44,5 @@ In browser see page http://localhost:3000
 
 - [ ] Separate result messages in lines and give them appropriate colors  
 - [ ] Make other configurations e.g.ZIP(USA), RU Postcodes. etc
+- [ ] Make autocomplete with postcodes.io
 
