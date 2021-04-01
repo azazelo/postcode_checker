@@ -8,7 +8,7 @@ module UKPostcodeCheckersConf
   def uk_postcode_checkers_conf
     {
       strategy: strategy,
-      checkers: [
+      checker_confs: [
         validator_conf,
         storage_checker_conf,
         external_api_checker_conf_validate,
