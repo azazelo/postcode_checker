@@ -69,5 +69,5 @@ gem 'jquery-rails'
 gem 'octicons_helper'
 
 # for development
- gem 'checkability', path: '../checkability'
-#gem 'checkability'
+# gem 'checkability', path: '../checkability'
+gem 'checkability'
