@@ -14,13 +14,7 @@
       <div class="row">
         <div class="col-lg-6 offset-1">
           <%= render partial: 'navigation' %>
-          <div style="margin-top: 2em;">
-            <% if flash[:now] %>
-              <div class="alert alert-<%= flash[:alert_class] %>" role="alert">
-                <%= flash[:now].html_safe %>
-              </div>
-            <% end %> 
-          </div>
+          <%= render partial: 'flash' %>
           <%= yield %>
         </div>
       </div>

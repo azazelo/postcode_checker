@@ -1,0 +1,7 @@
+<div style="margin-top: 2em;">
+  <% if flash[:now] %>
+    <div class="alert alert-<%= flash[:alert_class] %>" role="alert">
+      <%= flash[:now].html_safe %>
+    </div>
+  <% end %> 
+</div>
