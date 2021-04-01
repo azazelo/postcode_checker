@@ -1,7 +1,16 @@
-<div style="margin-top: 2em;">
+<div style="margin-top: 2em;" class="alert alert-<%= flash[:alert_class] %>" role="alert">
   <% if flash[:now] %>
-    <div class="alert alert-<%= flash[:alert_class] %>" role="alert">
-      <%= flash[:now].html_safe %>
-    </div>
+    <% if flash[:now].is_a?(Array) %>
+      <% flash[:now].each do |message| %>
+        <% if  message.split('::')[0] == 'true' %>
+          <%= octicon "check", :height => 16, style: 'fill: #28a745;' %>
+        <% else %>
+          <%= octicon "x", :height => 16, style: 'fill: #721c24;' %>
+        <% end %>
+        <%= message.split('::')[1] %>
+        <br/>
+      <% end %>
+    <% end %>
+      <%#= flash[:now] %>
   <% end %> 
 </div>
