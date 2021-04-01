@@ -66,6 +66,7 @@ gem 'faraday'
 
 gem 'bootstrap', '~> 4.5.2'
 gem 'jquery-rails'
+gem 'octicons_helper'
 
 # for development
 # gem 'checkability', path: '../checkability'

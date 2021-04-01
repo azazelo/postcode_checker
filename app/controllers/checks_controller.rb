@@ -10,14 +10,14 @@ class ChecksController < ApplicationController
 
   def perform
     @check = Check.new(value: check_params[:string])
-    message, alert_class =
+    messages, alert_class =
       if @check.valid?
         @check.perform_check
-        [@check.messages.join('<br/>'), _alert_class(@check.allowed)]
+        [@check.messages, _alert_class(@check.allowed)]
       else
-        [@check.errors.full_messages.join('<br/>'), _alert_class(false)]
+        [@check.errors.full_messages, _alert_class(false)]
       end
-    redirect_to checking_path, flash: { now: message, alert_class: alert_class }
+    redirect_to checking_path, flash: { now: messages, alert_class: alert_class }
   end
 
   private

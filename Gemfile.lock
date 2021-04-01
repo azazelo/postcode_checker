@@ -132,6 +132,11 @@ GEM
     nokogiri (1.11.2)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
+    octicons (9.2.0)
+      nokogiri (>= 1.6.3.1)
+    octicons_helper (9.2.0)
+      octicons (= 9.2.0)
+      rails
     popper_js (1.16.0)
     pry (0.14.0)
       coderay (~> 1.1)
@@ -254,6 +259,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   listen (~> 3.3)
+  octicons_helper
   pry
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
