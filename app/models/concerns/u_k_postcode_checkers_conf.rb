@@ -16,21 +16,21 @@ module UKPostcodeCheckersConf
       ]
     }
   end
-  
+
   def strategy
     # proc { a && ( b || ( c && d ) ) },
-    proc { |validator, storage, ext_api_validate, ext_api_districts| 
+    proc { |validator, storage, ext_api_validate, ext_api_districts|
       validator &&
-        ( storage || 
-          ( ext_api_validate && ext_api_districts )
+        (storage ||
+          (ext_api_validate && ext_api_districts)
         )
-      }
-#    proc { |validator, storage, ext_api_validate, ext_api_districts| 
-#      validator &&
-#        ( storage || 
-#          ( ext_api_validate && ext_api_districts )
-#        )
-#      }
+    }
+    #    proc { |validator, storage, ext_api_validate, ext_api_districts|
+    #      validator &&
+    #        ( storage ||
+    #          ( ext_api_validate && ext_api_districts )
+    #        )
+    #      }
   end
 
   def validator_conf
@@ -51,8 +51,7 @@ module UKPostcodeCheckersConf
   end
 
   def external_api_checker_conf_validate
-    {
-      name: :external_api_checker,
+    { name: :external_api_checker,
       path: 'http://api.postcodes.io/postcodes/',
       http_verb: :get,
       path_suffix: '/validate',
@@ -61,20 +60,17 @@ module UKPostcodeCheckersConf
       },
       stop_process_if_failure: true,
       success_message: 'Postcode IS VALID.',
-      failure_message: 'Postcode IS NOT VALID.'
-    }
+      failure_message: 'Postcode IS NOT VALID.' }
   end
 
   def external_api_checker_conf_inside_of_district
-    {
-      name: :external_api_checker,
+    { name: :external_api_checker,
       path: 'http://api.postcodes.io/postcodes/',
       check_method: proc { |result_hash|
         District.pluck(:name).include?(result_hash['result']['admin_district'])
       },
       stop_process_if_success: true,
       success_message: 'Postcode IS INSIDE allowed areas.',
-      failure_message: 'Postcode IS NOT INSIDE of allowed areas.'
-    }
+      failure_message: 'Postcode IS NOT INSIDE of allowed areas.' }
   end
 end
