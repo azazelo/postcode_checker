@@ -16,7 +16,7 @@ describe 'User interface', :aggregate_failures do
       expect(page).to have_content "Postcode '#{postcode_value}' Saved"
     end
 
-    before do 
+    before do
       Postcode.create(value: 'SH241AB')
     end
     scenario 'User type existing postcode in text_field, click on Submit button', :web_ui do
@@ -24,7 +24,7 @@ describe 'User interface', :aggregate_failures do
       expect(page).to have_content 'Add Postcode'
       page.fill_in 'postcode[value]', with: 'SH241AB'
       click_button add_postcode_button_text
-      expect(page).to have_content "Value has already been taken"
+      expect(page).to have_content 'Value has already been taken'
     end
 
     scenario 'User wants to see Allowed Postcodes', :web_ui do

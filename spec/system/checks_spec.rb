@@ -10,7 +10,7 @@ describe 'User interface for postcode checks', :aggregate_failures do
     let!(:district1) { District.create(name: 'Southwark') }
     let!(:district2) { District.create(name: 'Lambeth') }
 
-    let(:allowed_by_postcodes_io) { 'SE1 7QD' }
+    let(:allowed_by_postcodes_io) { 'SE17QD' }
     scenario 'get message on screen that postcode is ALLOWED' do
       visit checking_path
       expect(page).to have_content 'Postcode'
@@ -25,7 +25,7 @@ describe 'User interface for postcode checks', :aggregate_failures do
   feature 'Check not allowed postcodes', %(
     To check not allowed postcodes as a User I want to be able to enter postcode
     in text_field and click on button [#{submit_button_text}] ) do
-    let(:not_allowed_by_postcodes_io) { 'RM3 0PD' }
+    let(:not_allowed_by_postcodes_io) { 'RM30PD' }
     scenario 'get message on screen that postcode is NOT allowed' do
       visit checking_path
       expect(page).to have_content 'Postcode'
@@ -34,8 +34,8 @@ describe 'User interface for postcode checks', :aggregate_failures do
       expect(page).to have_content not_allowed_message(not_allowed_by_postcodes_io)
     end
 
-    let!(:exists_in_white_list) { 'SH24 1AA' }
-    let!(:postcode) { Postcode.create(value: 'SH24 1AA') }
+    let!(:exists_in_white_list) { 'SH241AA' }
+    let!(:postcode) { Postcode.create(value: 'SH241AA') }
     scenario 'get message on screen that postcode is NOT allowed' do
       visit checking_path
       expect(page).to have_content 'Postcode'
