@@ -24,10 +24,6 @@ describe 'User interface', :aggregate_failures do
       expect(page).to have_content 'Allowed Districts'
       click_link 'Add District'
       expect(page).to have_content 'Add Allowed District'
-
-      ## Ucomment show_page if you wants to see resulted browser page.
-      ## required of running webserver on localhost:3000
-      #       show_page
     end
   end
 end

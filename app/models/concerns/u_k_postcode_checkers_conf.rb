@@ -27,6 +27,8 @@ module UKPostcodeCheckersConf
     { name: :validator,
       next_handler: 'Storage',
       stop_process_on_failure: true,
+      success_message: 'Validator: Postcode COMPLY with UK Postcode format.',
+      failure_message: 'Validator: Postcode is NOT COMPLY with UK Postcode format.',
 
       format: {
         name: 'UK Postcodes',
@@ -38,7 +40,10 @@ module UKPostcodeCheckersConf
     { name: :storage_checker,
       next_handler: 'ApiValidator',
       stop_process_on_success: true,
+      success_message: 'Postcode has BEEN FOUND.',
+      failure_message: 'Postcode has NOT BEEN FOUND.',
 
+      attr_name: :value,
       storage_class: Postcode }
   end
 
@@ -46,27 +51,26 @@ module UKPostcodeCheckersConf
     { next_handler: 'ApiFinder',
       name: :external_api_checker,
       stop_process_on_failure: true,
+      success_message: 'Postcode IS VALID.',
+      failure_message: 'Postcode IS NOT VALID.',
 
       path: 'http://api.postcodes.io/postcodes/',
-      http_verb: :get,
-      path_suffix: '/validate',
+      http_verb: :get, path_suffix: '/validate',
       check_method: proc { |result_hash|
-        result_hash['result'] == true
-      },
-      success_message: 'Postcode IS VALID.',
-      failure_message: 'Postcode IS NOT VALID.' }
+                      result_hash['result'] == true
+                    } }
   end
 
   def api_finder_conf
     { name: :external_api_checker,
       next_handler: nil,
       stop_process_on_success: true,
+      success_message: 'Postcode IS INSIDE of allowed areas.',
+      failure_message: 'Postcode IS NOT INSIDE of allowed areas.',
 
       path: 'http://api.postcodes.io/postcodes/',
       check_method: proc { |result_hash|
         District.pluck(:name).include?(result_hash['result']['admin_district'])
-      },
-      success_message: 'Postcode IS INSIDE allowed areas.',
-      failure_message: 'Postcode IS NOT INSIDE of allowed areas.' }
+      } }
   end
 end
