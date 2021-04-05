@@ -5,27 +5,17 @@
 module UKPostcodeCheckersConf
   extend ActiveSupport::Concern
 
-  def uk_postcode_checkers_conf
+  def uk_postcode_checkers_conf 
     {
-      first_handler: 'Validator',
-      handler_confs: {
-        'Validator' => validator_conf,
-        'Storage' => storage_conf,
-        'ApiValidator' => api_validator_conf,
-        'ApiFinder' => api_finder_conf
-      }
+      'Validator'    => validator_conf.merge(    next_handler: 'Storage'),
+      'Storage'      => storage_conf.merge(      next_handler: 'ApiValidator'),
+      'ApiValidator' => api_validator_conf.merge(next_handler: 'ApiFinder'),
+      'ApiFinder'    => api_finder_conf
     }
   end
 
-  # checkers (names - Important):
-  #   validator            -> Validator
-  #   storage_checker      -> StorageChecker
-  #   external_api_checker -> ExternalApiChecker
-  #
-
   def validator_conf
     { name: :validator,
-      next_handler: 'Storage',
       stop_process_on_failure: true,
       success_message: 'Validator: Postcode COMPLY with UK Postcode format.',
       failure_message: 'Validator: Postcode is NOT COMPLY with UK Postcode format.',
@@ -38,7 +28,6 @@ module UKPostcodeCheckersConf
 
   def storage_conf
     { name: :storage_checker,
-      next_handler: 'ApiValidator',
       stop_process_on_success: true,
       success_message: 'Postcode has BEEN FOUND.',
       failure_message: 'Postcode has NOT BEEN FOUND.',
@@ -48,8 +37,7 @@ module UKPostcodeCheckersConf
   end
 
   def api_validator_conf
-    { next_handler: 'ApiFinder',
-      name: :external_api_checker,
+    { name: :external_api_checker,
       stop_process_on_failure: true,
       success_message: 'Postcode IS VALID.',
       failure_message: 'Postcode IS NOT VALID.',
@@ -63,7 +51,6 @@ module UKPostcodeCheckersConf
 
   def api_finder_conf
     { name: :external_api_checker,
-      next_handler: nil,
       stop_process_on_success: true,
       success_message: 'Postcode IS INSIDE of allowed areas.',
       failure_message: 'Postcode IS NOT INSIDE of allowed areas.',

@@ -68,6 +68,6 @@ gem 'bootstrap', '~> 4.5.2'
 gem 'jquery-rails'
 gem 'octicons_helper'
 
-gem 'checkability', '0.7.0'
+#gem 'checkability', '1.0.0'
 # for development
-# gem 'checkability', path: '../checkability'
+ gem 'checkability', path: '../checkability'

@@ -13,7 +13,7 @@ class ChecksController < ApplicationController
     messages, alert_class =
       if @check.valid?
         @check.perform_check
-        [@check.messages, _alert_class(@check.allowed)]
+        [@check.ch_messages, _alert_class(@check.ch_allowed)]
       else
         [@check.errors.full_messages.join('<br/>'), _alert_class(false)]
       end
