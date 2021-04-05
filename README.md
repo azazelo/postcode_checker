@@ -46,4 +46,5 @@ In browser see page http://localhost:3000
 - [ ] Make other configurations e.g.ZIP(USA), RU Postcodes. etc
 - [X] Make validation with postcodes.io
 - [ ] Make autocomplete with postcodes.io
+- [ ] Make yaml to use for config
 

@@ -5,12 +5,12 @@
 module UKPostcodeCheckersConf
   extend ActiveSupport::Concern
 
-  def uk_postcode_checkers_conf 
+  def uk_postcode_checkers_conf
     {
-      'Validator'    => validator_conf.merge(    next_handler: 'Storage'),
-      'Storage'      => storage_conf.merge(      next_handler: 'ApiValidator'),
+      'Validator' => validator_conf.merge(next_handler: 'Storage'),
+      'Storage' => storage_conf.merge(next_handler: 'ApiValidator'),
       'ApiValidator' => api_validator_conf.merge(next_handler: 'ApiFinder'),
-      'ApiFinder'    => api_finder_conf
+      'ApiFinder' => api_finder_conf
     }
   end
 
