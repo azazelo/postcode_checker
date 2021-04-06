@@ -17,7 +17,7 @@ module UKPostcodeCheckersConf
   def validator_conf
     { name: :validator,
       stop_process_on_failure: true,
-      success_message: 'Validator: Postcode COMPLY with UK Postcode format.',
+      success_message: 'Validator: Postcode is COMPLY with UK Postcode format.',
       failure_message: 'Validator: Postcode is NOT COMPLY with UK Postcode format.',
 
       format: {
