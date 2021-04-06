@@ -7,9 +7,9 @@ module UKPostcodeCheckersConf
 
   def uk_postcode_checkers_conf
     {
-      'Validator' => validator_conf.merge(next_handler: 'Storage'),
-      'Storage' => storage_conf.merge(next_handler: 'ApiValidator'),
-      'ApiValidator' => api_validator_conf.merge(next_handler: 'ApiFinder'),
+      'Validator' => validator_conf,
+      'Storage' => storage_conf,
+      'ApiValidator' => api_validator_conf,
       'ApiFinder' => api_finder_conf
     }
   end
