@@ -1,7 +1,10 @@
 # README  
-  
-This README would normally document whatever steps are necessary to get the  
-application up and running.  
+
+PostcodeChecker is a simple web Application that Checks if postcode is:  
+ - comply with UK postcode format;  
+ - existing in Allowed Postcodes List (Allowed Postcodes List Could be changed by user);  
+ - valid by check on postcodes.io;  
+ - within of Allowed Postcode Districts (Allowed Postcode Districts could be changed by user).  
   
 ## Ruby version >= 2.6.2  
   
