@@ -1,7 +1,7 @@
 PATH
   remote: ../checkability
   specs:
-    checkability (2.1.0)
+    checkability (2.1.1)
 
 GEM
   remote: https://rubygems.org/
